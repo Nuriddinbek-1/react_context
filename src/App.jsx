@@ -1,16 +1,26 @@
-import { useState } from "react";
-import "./App.css";
-import Component1 from "./components/Component1";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Layout from "./layout/Layout";
+import Home from "./pages/Home";
+import Contact from "./pages/Contact";
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  return (
-    <div className="App">
-      <h2>App</h2>
-      <Component1 count={count} setCount={setCount} />
-    </div>
-  );
+  const routes = createBrowserRouter([
+    {
+      path: "/",
+      element: <Layout />,
+      children: [
+        {
+          index: true,
+          element: <Home />,
+        },
+        {
+          path: "/contact",
+          element: <Contact />,
+        },
+      ],
+    },
+  ]);
+  return <RouterProvider router={routes} />;
 }
 
 export default App;
